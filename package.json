@@ -8,7 +8,7 @@
     "watch": "parcel watch src/content/*.ts --dist-dir dist/content --no-source-maps",
     "copy:static": "copyfiles manifest.json assets/**/* dist",
     "clean": "rimraf dist",
-    "dist": "npm run clean && npm run build && npm run copy:static",
+    "publish": "npm run clean && npm run build && npm run copy:static",
     "lint": "eslint --ext .ts,.tsx ./src",
     "test": "jest -c ./config/jest.config.js"
   },
@@ -28,9 +28,5 @@
     "process": "^0.11.10",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.4"
-  },
-  "dependencies": {
-    "posthtml-parser": "^0.11.0",
-    "posthtml-render": "^3.0.0"
   }
 }

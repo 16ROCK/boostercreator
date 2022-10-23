@@ -2,23 +2,25 @@ declare global {
   let CBoosterCreatorPage: SteamBoosterCreatorPage;
   let g_sessionID: string;
   let ShowAlertDialog: SteamAlertFunctions;
+  let $J: JQueryStatic;
 }
 
 import './style.css';
 
-const profitButtonsTemplate = readFileSync(
-  path.join(__dirname, '/templates/profit-buttons.html'),
-  'utf8'
-);
-
-import $ from 'jquery';
 import { SteamAlertFunctions } from './models/config';
 import { SteamBoosterCreatorPage } from './models/page';
 import { BoosterPackItem, TableData } from './models/table';
 import { labels } from './constants/language';
 import { steamFee, maxRetryCount } from './constants/config';
-import path from 'path';
-import { readFileSync } from 'fs';
+
+const profitButtonsTemplate = `<div class="profit-buttons-container">
+  <div class="fast_profit_btn disable" value="request">
+    FAST PROFIT
+  </div>
+  <div class="profit_btn disable" value="price">
+    PROFIT
+  </div>
+</div>`;
 
 const sessionId = g_sessionID;
 const boosterPackCreatorRef = CBoosterCreatorPage;
@@ -35,7 +37,7 @@ const wallet_Info = walletInfoItem
   : { currency: 1, priceGems: 0 };
 
 const currentLanguage =
-  $('.menuitem:last').attr('href')?.split('/')[3] == 'ru' ? 'RU' : 'EN';
+  $J('.menuitem:last').attr('href')?.split('/')[3] == 'ru' ? 'RU' : 'EN';
 
 const languageLabels = labels[currentLanguage];
 
@@ -48,9 +50,9 @@ let l = '';
 let n = 99;
 let appid = '';
 
-const leftBPCreatorBox = $('.booster_creator_left')[0];
-const rightBPCreatorBox = $('.booster_creator_right')[0];
-const BPCreatorMainContainer = $('.booster_creator_area')[0];
+const leftBPCreatorBox = $J('.booster_creator_left')[0];
+const rightBPCreatorBox = $J('.booster_creator_right')[0];
+const BPCreatorMainContainer = $J('.booster_creator_area')[0];
 
 rightBPCreatorBox.classList.remove('booster_creator_right');
 rightBPCreatorBox.classList.add('booster_creator_right_table');
@@ -73,9 +75,9 @@ wrapperBox.appendChild(leftBPCreatorBox);
 wrapperBox.appendChild(rightContainer);
 BPCreatorMainContainer.appendChild(wrapperBox);
 
-$('.creator-right-container').prepend(profitButtonsTemplate);
+$J('.creator-right-container').prepend(profitButtonsTemplate);
 
-$('.booster_creator_right_table')
+$J('.booster_creator_right_table')
   .html('')
   .before(
     `<div class="booster_creator">
@@ -108,7 +110,7 @@ function stringFloatToInteger(n: string) {
 }
 
 function addItem() {
-  $('.booster_creator_right_table').html('');
+  $J('.booster_creator_right_table').html('');
 
   bk.forEach((itemId) => {
     const currentItem = bd[itemId];
@@ -144,7 +146,7 @@ function addItem() {
         ? 'orange'
         : 'red';
 
-    $('.booster_creator_right_table').append(
+    $J('.booster_creator_right_table').append(
       // render(listItemHtml)
       `<div class="creator-table-row${
         currentItem.unavailable || !currentItem.price ? ' disable' : ''
@@ -171,23 +173,23 @@ function addItem() {
     );
   });
 
-  $(
-    '.creator-table-row[value="' + $('#booster_game_selector').val() + '"]'
+  $J(
+    '.creator-table-row[value="' + $J('#booster_game_selector').val() + '"]'
   ).addClass('active');
 }
 
-$('.profit_btn, .fast_profit_btn').click(function () {
-  if (!$(this).hasClass('disable')) {
-    $('.creator-table-header>div>span').remove();
-    bk = sortProfit(bd, $(this).attr('value') as keyof BoosterPackItem);
+$J('.profit_btn, .fast_profit_btn').click(function () {
+  if (!$J(this).hasClass('disable')) {
+    $J('.creator-table-header>div>span').remove();
+    bk = sortProfit(bd, $J(this).attr('value') as keyof BoosterPackItem);
     addItem();
-    $('.booster_creator_right_table').scrollTop(0);
+    $J('.booster_creator_right_table').scrollTop(0);
   }
 });
 
-$('.creator-table-header>div').click(function () {
-  $('.creator-table-header>div>span').remove();
-  const sc = $(this).attr('value') as keyof BoosterPackItem;
+$J('.creator-table-header>div').click(function () {
+  $J('.creator-table-header>div>span').remove();
+  const sc = $J(this).attr('value') as keyof BoosterPackItem;
   sort_dir =
     sort_column == sc
       ? !sort_dir
@@ -197,33 +199,33 @@ $('.creator-table-header>div').click(function () {
   sort_column = sc;
   bk = sort(bd, sort_column, sort_dir);
   if (sort_dir) {
-    $(this).append('<span>▲</span>');
+    $J(this).append('<span>▲</span>');
   } else {
-    $(this).append('<span>▼</span>');
+    $J(this).append('<span>▼</span>');
   }
   addItem();
-  $('.booster_creator_right_table').scrollTop(0);
+  $J('.booster_creator_right_table').scrollTop(0);
 });
 
-$(document).on('mousedown', '.creator-table-row', function (e) {
+$J(document).on('mousedown', '.creator-table-row', function (e) {
   if (!e.originalEvent || !e.originalEvent.button) {
-    location.hash = $(this).attr('value') as string;
+    location.hash = $J(this).attr('value') as string;
   }
 });
 
-$(window).on('hashchange', function () {
-  $('.creator-table-row').removeClass('active');
-  $(
-    '.creator-table-row[value="' + $('#booster_game_selector').val() + '"]'
+$J(window).on('hashchange', function () {
+  $J('.creator-table-row').removeClass('active');
+  $J(
+    '.creator-table-row[value="' + $J('#booster_game_selector').val() + '"]'
   ).addClass('active');
   priceoverview();
 });
 
-$(document).on('mousedown', '.ViewMarket', function (e) {
+$J(document).on('mousedown', '.ViewMarket', function (e) {
   if (e.originalEvent && e.originalEvent.button < 2) {
     open(
       'https://steamcommunity.com/market/listings/753/' +
-        bd[$('#booster_game_selector').val() as string].link
+        bd[$J('#booster_game_selector').val() as string].link
     );
   }
 });
@@ -232,7 +234,7 @@ boosterPackCreatorRef.ExecuteCreateBooster = function (
   rgBoosterData,
   nTradabilityPreference
 ) {
-  $.post('https://steamcommunity.com/tradingcards/ajaxcreatebooster/', {
+  $J.post('https://steamcommunity.com/tradingcards/ajaxcreatebooster/', {
     sessionid: sessionId,
     appid: rgBoosterData.appid,
     series: rgBoosterData.series,
@@ -250,7 +252,7 @@ boosterPackCreatorRef.ExecuteCreateBooster = function (
             minute: 'numeric'
           });
         bd[data.purchase_result.appid]['unavailable'] = true;
-        $('.creator-table-row[value="' + data.purchase_result.appid + '"]')
+        $J('.creator-table-row[value="' + data.purchase_result.appid + '"]')
           .addClass('disable')
           .attr('title', bd[data.purchase_result.appid]['available_at_time']);
       }
@@ -381,7 +383,7 @@ function scanRequest(n: number, retryCount = maxRetryCount) {
     return;
   }
 
-  $.get(
+  $J.get(
     'https://steamcommunity.com/market/multisell?appid=753&contextid=6' +
       link[n] +
       '&l=english'
@@ -434,7 +436,7 @@ function scanPrice(n: number, retryCount = maxRetryCount) {
       'https://steamcommunity.com/market/multibuy?appid=753' +
       link[n] +
       '&l=english';
-    $.get(url)
+    $J.get(url)
       .done(function (d) {
         if (d.includes('Steam Community :: Error')) {
           return setTimeout(function () {
@@ -470,7 +472,7 @@ function scanPrice(n: number, retryCount = maxRetryCount) {
         }, 15000);
       });
   } else {
-    $('.fast_profit_btn,.profit_btn').removeClass('disable');
+    $J('.fast_profit_btn,.profit_btn').removeClass('disable');
   }
 }
 
@@ -481,7 +483,7 @@ function PriceGems(retryCount = 2) {
     return;
   }
 
-  $.get(
+  $J.get(
     'https://steamcommunity.com/login/home/?goto=%2Fmarket%2Fmultibuy%3Fappid%3D753%26items%5B%5D%3D753-Sack%2520of%2520Gems%26qty%5B%5D%3D0%26l%3Denglish'
   )
     .done(function (data: string) {
@@ -512,7 +514,7 @@ function RequestGems(gemsSellPrice: number, retryCount = 2) {
     return;
   }
 
-  $.get(
+  $J.get(
     'https://steamcommunity.com/login/home/?goto=%2Fmarket%2Fmultisell%3Fappid%3D753%26contextid%3D6%26items%5B%5D%3D753-Sack%2520of%2520Gems%26qty%5B%5D%3D0%26l%3Denglish'
   )
     .done(function (data: string) {
@@ -558,11 +560,11 @@ PriceGems();
 
 function priceoverview() {
   if (
-    !$('.priceoverview').length &&
-    appid != $('#booster_game_selector').val()
+    !$J('.priceoverview').length &&
+    appid != $J('#booster_game_selector').val()
   ) {
-    const currentLink = bd[$('#booster_game_selector').val() as string].link;
-    $.get(
+    const currentLink = bd[$J('#booster_game_selector').val() as string].link;
+    $J.get(
       'https://steamcommunity.com/market/priceoverview/?country=' +
         currentLanguage +
         '&currency=' +
@@ -583,21 +585,21 @@ function priceoverview() {
           strInfo += languageLabels.Volume + strVolume + '<br>';
         }
         if (
-          !$('.priceoverview').length &&
-          appid != $('#booster_game_selector').val()
+          !$J('.priceoverview').length &&
+          appid != $J('#booster_game_selector').val()
         ) {
-          $('.booster_goo_cost').before(
+          $J('.booster_goo_cost').before(
             '<div class="priceoverview" style="min-height: 3em; margin-left: 1em;">' +
               strInfo +
               '</div>'
           );
         }
       }
-      appid = $('#booster_game_selector').val() as string;
+      appid = $J('#booster_game_selector').val() as string;
     });
   }
-  if (!$('.ViewMarket').length) {
-    $('.booster_goo_cost').before(
+  if (!$J('.ViewMarket').length) {
+    $J('.booster_goo_cost').before(
       '<div class="ViewMarket">' + languageLabels.ViewInMarket + '</div>'
     );
   }

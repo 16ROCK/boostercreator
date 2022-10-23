@@ -9,6 +9,7 @@
     ],
     "declaration": false,
     "strict": true,
+    "sourceMap": false,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,

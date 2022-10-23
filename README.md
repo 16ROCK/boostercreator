@@ -1,6 +1,6 @@
 # boostercreator
 
-<p align="center" ><img width="600" src="https://github.com/16ROCK/boostercreator/blob/main/icon128.png?raw=true"/></p>
+<p align="center" ><img width="600" src="https://github.com/16ROCK/boostercreator/blob/main/assets/icons/icon128.png?raw=true" onerror="this.src = 'https://github.com/16ROCK/boostercreator/blob/main/icon128.png?raw=true';"/></p>
 Expansion for the most profitable exchange of gems for booster packs.
 
 This extension can:
