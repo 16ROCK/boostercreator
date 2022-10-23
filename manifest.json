@@ -1,27 +1,45 @@
 {
-    "name": "Boostercreator",
-    "version": "2.1.1",
-    "manifest_version": 2,
-    "icons": { "16": "icon16.png",
-              "48": "icon48.png",
-              "128": "icon128.png" },
-    "browser_action": {
-        "default_icon" : "icon128.png",
-        "default_title": "Profitable exchange of gems to booster pack"
+  "manifest_version": 3,
+  "name": "Booster Pack Creator Helper",
+  "version": "3.0.0",
+  "description": "Extension to create a new visualization for the Steam Booster Pack Creator page",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content/index.js"
+      ],
+      "matches": [
+        "https://steamcommunity.com/tradingcards/boostercreator/*"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/icons/*.png"
+      ],
+      "matches": [
+        "https://*/*"
+      ],
+      "extension_ids": []
     },
-    "short_name": "Boostercreator",
-    "background" : {
-        "scripts" : ["background.js"]
-    },
-    "content_scripts": [
-        {
-            "matches": [ "https://steamcommunity.com/tradingcards/boostercreator/*"],
-            "css":["style.css"],
-            "js": [ "script.js" ],
-            "run_at": "document_end"
-        }
-    ],
-    "web_accessible_resources": [
-      "/injected.js"
-    ]
+    {
+      "resources": [
+        "content/content.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ],
+      "extension_ids": []
+    }
+  ]
 }
