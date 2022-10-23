@@ -31,6 +31,12 @@ const storedItemListString = localStorage.getItem('bd');
 const storedItemList = storedItemListString
   ? JSON.parse(storedItemListString)
   : {};
+
+const boosterOptionsString = localStorage.getItem('boosterOptions');
+const boosterOptions = boosterOptionsString
+  ? JSON.parse(boosterOptionsString)
+  : {};
+
 const walletInfoItem = localStorage.getItem('wallet_Info');
 const wallet_Info = walletInfoItem
   ? JSON.parse(walletInfoItem)
@@ -41,6 +47,7 @@ const currentLanguage =
 
 const languageLabels = labels[currentLanguage];
 
+let displayProfitValue = !!boosterOptions.displayProfitValue;
 let sort_column: keyof BoosterPackItem = 'name';
 let sort_dir = true;
 
@@ -75,6 +82,9 @@ wrapperBox.appendChild(leftBPCreatorBox);
 wrapperBox.appendChild(rightContainer);
 BPCreatorMainContainer.appendChild(wrapperBox);
 
+const profitColumnClass = displayProfitValue ? '' : 'hide-column';
+const nameColumnFillClass = displayProfitValue ? '' : 'big-column';
+
 $J('.creator-right-container').prepend(profitButtonsTemplate);
 
 $J('.booster_creator_right_table')
@@ -82,7 +92,7 @@ $J('.booster_creator_right_table')
   .before(
     `<div class="booster_creator">
       <div class="creator-table-header">
-        <div class="name" value="name">
+        <div class="name ${nameColumnFillClass}" value="name">
           ${languageLabels.Name}
           <span>▲</span>
         </div>
@@ -95,7 +105,7 @@ $J('.booster_creator_right_table')
         <div value="gems">
           ${languageLabels.Gems}
         </div>
-        <div value="profit">
+        <div value="profit" class="${profitColumnClass}">
           ${languageLabels.Profit}
         </div>
       </div>
@@ -147,14 +157,13 @@ function addItem() {
         : 'red';
 
     $J('.booster_creator_right_table').append(
-      // render(listItemHtml)
       `<div class="creator-table-row${
         currentItem.unavailable || !currentItem.price ? ' disable' : ''
       }
         "value="${itemId}"
         ${unavailable ? 'title="' + availableAtTime + '"' : ''}
         >
-          <div class="name">
+          <div class="name ${nameColumnFillClass}">
             ${itemName}
           </div>
           <div class="request ${itemRequestColor}">
@@ -166,7 +175,7 @@ function addItem() {
           <div class="gem">
             ${currentItem.gems}
           </div>
-          <div class="profit">
+          <div class="profit ${profitColumnClass}">
             ${Math.round(fastProfit) / 100}
           </div>
         </div>`

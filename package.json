@@ -4,8 +4,11 @@
   "license": "MIT",
   "description": "Chrome Extension to create a new visualization for the Steam Booster Pack Creator page",
   "scripts": {
-    "build": "parcel build src/content/*.ts --dist-dir dist/content --no-source-maps",
-    "watch": "parcel watch src/content/*.ts --dist-dir dist/content --no-source-maps",
+    "build:content": "parcel build src/content/*.ts --dist-dir dist/content --no-source-maps",
+    "build:options": "parcel build src/options/options.html --dist-dir dist/options --public-url ./ --no-source-maps",
+    "build": "npm run build:content && npm run build:options",
+    "watch:content": "parcel watch src/content/*.ts --dist-dir dist/content --no-source-maps",
+    "watch:option": "parcel watch src/options/options.html --dist-dir dist/options --public-url ./ --no-source-maps",
     "copy:static": "copyfiles manifest.json assets/**/* dist",
     "clean": "rimraf dist",
     "publish": "npm run clean && npm run build && npm run copy:static",

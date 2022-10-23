@@ -145,6 +145,11 @@
   overflow: hidden;
 }
 
+.creator-table-row .name.big-column,
+.booster_creator .creator-table-header .name.big-column {
+  width: 55%;
+}
+
 .creator-table-row.disable {
   background-color: #1c1c1c;
   color: #767676;
@@ -153,6 +158,11 @@
 .creator-table-row.active {
   background-color: #5392d0;
   color: #fff;
+}
+
+.creator-table-header > .hide-column,
+.creator-table-row > .hide-column {
+  display: none;
 }
 
 .ViewMarket {

@@ -22,19 +22,21 @@
       "run_at": "document_idle"
     }
   ],
+  "permissions": [
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/icons/*.png"
-      ],
-      "matches": [
-        "https://*/*"
-      ],
-      "extension_ids": []
-    },
-    {
-      "resources": [
-        "content/content.js"
+        "assets/icons/*.png",
+        "content/content.js",
+        "options/options/*.js",
+        "options/options/*.css",
+        "options/options/*.html"
       ],
       "matches": [
         "https://*/*"
