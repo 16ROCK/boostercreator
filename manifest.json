@@ -22,13 +22,19 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": [
-    "storage"
-  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "action": {
+    "default_title": "open Steam Booster Pack Creator page"
+  },
   "options_ui": {
     "page": "options/options.html",
     "open_in_tab": false
   },
+  "permissions": [
+    "storage"
+  ],
   "web_accessible_resources": [
     {
       "resources": [
