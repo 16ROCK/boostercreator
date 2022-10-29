@@ -1,0 +1,188 @@
+.booster_creator span {
+  position: absolute;
+  color: #fff;
+}
+
+/* Top Buttons - START*/
+.profit-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.profit_btn {
+  padding: 5px;
+  background-color: #ffae00;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.fast_profit_btn {
+  background-color: green;
+  cursor: pointer;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.fast_profit_btn.disable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.profit_btn.disable {
+  opacity: 0.5;
+  cursor: default;
+}
+/* Top Buttons - END*/
+
+/* TABLE CONTAINERS - START */
+.booster_creator_right {
+  opacity: 0;
+}
+
+.booster_creator_left {
+  margin-right: 1.5rem;
+}
+
+.booster_creator_right_table {
+  overflow: auto;
+  display: table-row-group;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  margin: none;
+}
+
+.booster_creator {
+  background-color: #16202d;
+  user-select: none;
+  display: table-header-group;
+  top: 0;
+  position: sticky;
+}
+
+.creator-table-container {
+  position: relative;
+  display: table;
+}
+
+.creator-table-wrapper {
+  overflow: auto;
+  height: 500px;
+  border: 1px solid #82807c;
+}
+
+.creator-table-wrapper::-webkit-scrollbar {
+  width: 10px;
+  border-left: 1px solid #6c6c6c;
+}
+
+.creator-table-wrapper::-webkit-scrollbar-thumb {
+  background: #212f43;
+  border-width: 1px 0 1px 1px;
+  border-style: solid;
+  border-color: #6c6c6c;
+}
+
+.creator-table-wrapper:hover::-webkit-scrollbar-thumb {
+  background: #6a7d9b;
+}
+
+/* TABLE CONTAINERS - END */
+.creator-table-header,
+.creator-table-row {
+  box-sizing: border-box;
+  display: table-row;
+  cursor: pointer;
+}
+
+.creator-table-row {
+  color: #fff;
+}
+
+.creator-table-row:nth-child(odd) {
+  background: #212f43;
+}
+
+.creator-table-header > div:first-child,
+.creator-table-row > div:first-child {
+  padding-left: 10px;
+}
+
+.creator-table-header > div:last-child,
+.creator-table-row > div:last-child {
+  padding-right: 10px;
+}
+
+.creator-helper-container {
+  display: flex;
+}
+
+.creator-table-header > div,
+.creator-table-row > div {
+  box-sizing: border-box;
+  display: table-cell;
+  text-align: center;
+
+  padding: 15px 0;
+  border-bottom: 1px solid #6c6c6c;
+  float: left;
+
+  width: 15%;
+}
+
+.creator-table-row .name,
+.booster_creator .creator-table-header .name {
+  width: 40%;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.creator-table-row .name.big-column,
+.booster_creator .creator-table-header .name.big-column {
+  width: 55%;
+}
+
+.creator-table-row.disable {
+  background-color: #1c1c1c;
+  color: #767676;
+}
+
+.creator-table-row.active {
+  background-color: #5392d0;
+  color: #fff;
+}
+
+.creator-table-header > .hide-column,
+.creator-table-row > .hide-column {
+  display: none;
+}
+
+.ViewMarket {
+  cursor: pointer;
+  color: #fff;
+}
+
+.booster_option_image {
+  cursor: pointer;
+}
+
+.creator-table-row > div.green {
+  color: green;
+}
+.creator-table-row > div.orange {
+  color: orange;
+}
+.creator-table-row > div.red {
+  color: red;
+}
+.creator-table-row.active > div {
+  color: #fff;
+}

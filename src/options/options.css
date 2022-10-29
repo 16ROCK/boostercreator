@@ -1,0 +1,30 @@
+body {
+  background: #212f43;
+  color: #fff;
+  padding: 10px;
+}
+
+#bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#status {
+  text-align: center;
+  color: green;
+  font-weight: 700;
+}
+
+.settingsCancel {
+  display: none;
+}
+
+#btnSetSave {
+  padding: 10px 20px;
+  background-color: #16202d;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 5px;
+}

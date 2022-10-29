@@ -1,0 +1,36 @@
+{
+  "name": "chrome-extension-ts-starter",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Chrome Extension to create a new visualization for the Steam Booster Pack Creator page",
+  "scripts": {
+    "build:content": "parcel build src/content/*.ts --dist-dir dist/content --no-source-maps",
+    "build:background": "parcel build src/background/background.ts --dist-dir dist/background --no-source-maps",
+    "build:options": "parcel build src/options/options.html --dist-dir dist/options --public-url ./ --no-source-maps",
+    "build": "npm run build:content && npm run build:background && npm run build:options",
+    "watch:content": "parcel watch src/content/*.ts --dist-dir dist/content --no-source-maps",
+    "watch:option": "parcel watch src/options/options.html --dist-dir dist/options --public-url ./ --no-source-maps",
+    "copy:static": "copyfiles manifest.json assets/**/* dist",
+    "clean": "rimraf dist",
+    "publish": "npm run clean && npm run build && npm run copy:static",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "test": "jest -c ./config/jest.config.js"
+  },
+  "devDependencies": {
+    "@parcel/transformer-inline-string": "^2.7.0",
+    "@parcel/transformer-typescript-tsc": "^2.7.0",
+    "@types/chrome": "^0.0.197",
+    "@types/jquery": "^3.5.14",
+    "@types/node": "^18.8.2",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.24.0",
+    "jquery": "^3.6.1",
+    "parcel": "^2.7.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
+  }
+}

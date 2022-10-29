@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://steamcommunity.com/tradingcards/boostercreator/",
+      "runtimeArgs": [
+        "--load-extension=${workspaceFolder}/dist"
+      ]
+    },
+  ]
+}
